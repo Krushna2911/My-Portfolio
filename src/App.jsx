@@ -11,6 +11,7 @@ import Blog from "./components/Blog";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AIChatbot from "./components/AIChatbot";
+import MusicPlayer from "./components/MusicPlayer";
 
 export default function App() {
   const [dark, setDark] = useState(false);
@@ -38,6 +39,7 @@ export default function App() {
         {<Contact dark={dark} />}
         {<Footer dark={dark} />}
         {<AIChatbot dark={dark} />} 
+        <MusicPlayer />
     </div>
   );
 }
