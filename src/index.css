@@ -1,12 +1,9 @@
-
-/* Google Fonts */
-/* Font loaded from index.html */
-
 /* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: all 0.2s ease;
 }
 
 html {
@@ -16,14 +13,62 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+/* Text fix */
+h1, h2, h3, p {
+  overflow-wrap: break-word;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar       { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #7c3aed55; border-radius: 99px; }
 
-/* Hide nav links on mobile */
+/* Animation */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .nav-links-desktop { display: none !important; }
+  .hamburger-btn { display: block !important; }
+  .mobile-menu { display: flex !important; }
+
+  section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .chatbot-btn {
+    bottom: 16px !important;
+    right: 16px !important;
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+  .hamburger-btn { display: none !important; }
+  .mobile-menu { display: none !important; }
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }

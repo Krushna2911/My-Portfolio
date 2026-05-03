@@ -65,7 +65,7 @@ export default function PlatformProfiles({ dark }) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: 20,
             marginTop: 48,
           }}
@@ -172,7 +172,7 @@ export default function PlatformProfiles({ dark }) {
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(3, 1fr)",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(90px, 1fr))",
                       gap: 8,
                     }}
                   >
@@ -193,9 +193,9 @@ export default function PlatformProfiles({ dark }) {
                             style={{
                               fontWeight: 900,
                               fontSize: 15,
-                              color: dark
-                                ? "#f8fafc"
-                                : "#0f172a",
+                              color: dark,
+                              wordBreak: "break-word",     
+                              whiteSpace: "normal", 
                             }}
                           >
                             {item.value || item}

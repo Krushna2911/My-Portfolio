@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useTypingEffect } from "../hooks/useTypingEffect";
 import FaceAvatar from "./FaceAvatar";
 import GitHubLogo from "../logos/GitHubLogo";
@@ -5,7 +6,6 @@ import LinkedInLogo from "../logos/LinkedInLogo";
 import LeetCodeLogo from "../logos/LeetCodeLogo";
 import KaggleLogo from "../logos/KaggleLogo";
 
-// Typing text (updated to your profile)
 const TYPED_WORDS = [
   "Java + Spring Boot Developer",
   "Full Stack Developer",
@@ -13,84 +13,120 @@ const TYPED_WORDS = [
   "Data Science Learner",
 ];
 
-// Realistic stats (no fake numbers)
 const STATS = [
-  { n: "4+",      l: "Projects" },
-  { n: "6+",      l: "Certifications" },
-  { n: "AWS",     l: "Cloud Skills" },
-  { n: "MCA 2025",l: "Education" },
+  { n: "4+", l: "Projects" },
+  { n: "6+", l: "Certifications" },
+  { n: "AWS", l: "Cloud Skills" },
+  { n: "MCA 2025", l: "Education" },
 ];
 
 export default function Hero({ dark }) {
   const typed = useTypingEffect(TYPED_WORDS);
 
+  // Responsive control
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <section id="hero" style={{
-      minHeight: "100vh",
-      display: "flex",
-      overflow: "hidden",
-      alignItems: "center",
-      justifyContent: "center",
-      paddingTop: 80,
-      background: dark ? "#0a0a14" : "#fafafa",
-    }}>
-
-      <div style={{
-        maxWidth: 1100,
-        margin: "0 auto",
-        padding: "0 24px",
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",
         display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
+        flexDirection: "column",
         justifyContent: "center",
-        gap: 64,
-      }}>
-
+        paddingTop: "clamp(80px, 12vw, 120px)",
+        paddingBottom: "40px",
+        background: dark ? "#0a0a14" : "#fafafa",
+      }}
+    >
+      {/* MAIN CONTAINER */}
+      <div
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "0 24px",
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: isMobile ? 30 : 80,
+        }}
+      >
         {/* LEFT */}
-        <div style={{ flex: "1 1 420px", maxWidth: 560 }}>
-
-          <h1 style={{
-            fontSize: "clamp(2.5rem, 6vw, 4rem)",
-            fontWeight: 900,
-            marginBottom: 12,
-          }}>
+        <div
+          style={{
+            flex: 1,
+            textAlign: isMobile ? "center" : "left",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              fontWeight: 900,
+              marginBottom: 12,
+              lineHeight: 1.1,
+            }}
+          >
             Hi, I'm{" "}
             <span style={{ color: "#7c3aed" }}>
               Krushna Nikam
             </span>
           </h1>
 
-          <div style={{
-            fontSize: "1.3rem",
-            fontWeight: 700,
-            marginBottom: 20,
-          }}>
+          {/* Typing */}
+          <div
+            style={{
+              fontSize: "clamp(1rem, 3vw, 1.3rem)",
+              fontWeight: 700,
+              marginBottom: 20,
+            }}
+          >
             <span style={{ color: "#7c3aed" }}>{typed}</span>
-            <span>|</span>
+            <span className="cursor">|</span>
           </div>
 
-          <p style={{
-            fontSize: 16,
-            marginBottom: 30,
-            color: dark ? "#aaa" : "#444"
-          }}>
+          <p
+            style={{
+              fontSize: "clamp(14px, 3vw, 16px)",
+              marginBottom: 30,
+              color: dark ? "#aaa" : "#444",
+              lineHeight: 1.6,
+            }}
+          >
             MCA student specializing in{" "}
-            <strong>Java, Spring Boot, React, AWS Cloud and Data Science</strong>.
-            Passionate about building scalable applications and solving real-world problems.
+            <strong>
+              Java, Spring Boot, React, AWS Cloud and Data Science
+            </strong>
+            . Passionate about building scalable applications and solving
+            real-world problems.
           </p>
 
           {/* Buttons */}
-          <div style={{ display: "flex", gap: 12, marginBottom: 30 }}>
-
+          <div
+            style={{
+              display: "flex",
+              gap: 14,
+              justifyContent: isMobile ? "center" : "flex-start",
+              flexWrap: "wrap",
+              marginBottom: 30,
+            }}
+          >
             <a
               href="https://drive.google.com/file/d/1oaGTODWhM6v_VdA46BO6BH4hyEEI6Zff/view?usp=drive_link"
-              download
               style={{
-                padding: "12px 24px",
+                padding: "12px 26px",
                 background: "#7c3aed",
                 color: "white",
-                borderRadius: 8,
-                textDecoration: "none"
+                borderRadius: 10,
+                textDecoration: "none",
+                fontWeight: 600,
+                boxShadow: "0 8px 25px rgba(124,58,237,0.35)",
               }}
             >
               📄 Resume
@@ -99,66 +135,77 @@ export default function Hero({ dark }) {
             <a
               href="#contact"
               style={{
-                padding: "12px 24px",
+                padding: "12px 26px",
                 border: "2px solid #7c3aed",
                 color: "#7c3aed",
-                borderRadius: 8,
-                textDecoration: "none"
+                borderRadius: 10,
+                textDecoration: "none",
+                fontWeight: 600,
               }}
             >
               💼 Contact
             </a>
-
           </div>
 
-          {/* Social Links */}
-          <div style={{ display: "flex", gap: 10 }}>
-
+          {/* Social Icons */}
+          <div
+            style={{
+              display: "flex",
+              gap: 16,
+              justifyContent: isMobile ? "center" : "flex-start",
+            }}
+          >
             <a href="https://github.com/Krushna2911">
-              <GitHubLogo size={20}/>
+              <GitHubLogo size={24} />
             </a>
 
             <a href="https://www.linkedin.com/in/krushnanikam/">
-              <LinkedInLogo size={20}/>
+              <LinkedInLogo size={24} />
             </a>
 
             <a href="https://leetcode.com/u/krushnaNikam29/">
-              <LeetCodeLogo size={20}/>
+              <LeetCodeLogo size={24} />
             </a>
 
             <a href="https://www.kaggle.com/krushnanikam29">
-              <KaggleLogo size={20}/>
+              <KaggleLogo size={24} />
             </a>
-
           </div>
-
         </div>
 
-        {/* RIGHT */}
-        <div>
-          <FaceAvatar size={200} />
+        {/* RIGHT (Avatar) */}
+        <div
+          style={{
+            flex: 1,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <FaceAvatar size={isMobile ? 150 : 300} dark={dark} />
         </div>
-
       </div>
 
-      {/* Stats */}
-      <div style={{
-        position: "absolute",
-        bottom: 0,
-        width: "100%",
-        padding: 16,
-        display: "flex",
-        justifyContent: "center",
-        gap: 30,
-      }}>
+      {/* STATS */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 40,
+          marginTop: 50,
+          flexWrap: "wrap",
+        }}
+      >
         {STATS.map((s) => (
           <div key={s.l} style={{ textAlign: "center" }}>
-            <div style={{ fontWeight: 900 }}>{s.n}</div>
-            <div style={{ fontSize: 12 }}>{s.l}</div>
+            <div style={{ fontWeight: 900, fontSize: 18 }}>
+              {s.n}
+            </div>
+            <div style={{ fontSize: 12, opacity: 0.6 }}>
+              {s.l}
+            </div>
           </div>
         ))}
       </div>
-
     </section>
   );
 }
