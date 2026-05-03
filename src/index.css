@@ -1,0 +1,29 @@
+
+/* Google Fonts */
+/* Font loaded from index.html */
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #7c3aed55; border-radius: 99px; }
+
+/* Hide nav links on mobile */
+@media (max-width: 768px) {
+  .nav-links-desktop { display: none !important; }
+}
